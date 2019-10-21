@@ -1,0 +1,11 @@
+{
+  "name": "LindwurmBot",
+  "version": "1.0",
+  "description": "LindwurmBot",
+  "main": "bot.js",
+  "author": "Rorin.Korfax",
+  "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "winston": "^3.2.1"
+  }
+}
