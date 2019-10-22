@@ -16,13 +16,17 @@ bot.on('ready', function (evt) {
 	logger.info('Logged in as: ' + bot.username);
 });
 // onGameChange hook
+var usersStatus = new Map();
 bot.on('presence', function (user, userID, status, game, event) {
-	logger.info(user + ' changed somehow!');
+	logger.info(user + ' changed!\n' + JSON.stringify(event));
 	// bot.sendMessage({ to: '456917371882307605', message: user + ' changed somehow!'});
 	if (game != null) {
-		bot.sendMessage({
-			to: '456917371882307605',
-			message: user + ' отправился в ' + game.name + '!'
-		});
+		if (!usersStatus.has(userID) || usersStatus.get(userID) != game.name) {
+			bot.sendMessage({ to: '456917371882307605', message: user + ' отправился в ' + game.name + '!' });
+		}
+		usersStatus.set(userID, game.name);
+	}
+	if (game == null && usersStatus.has(userID)) {
+		usersStatus.delete(userID);
 	}
 });
